@@ -57,6 +57,25 @@ tokens:[{
 }]
 });
 // to define our own instance methods
+
+bcryptjs.genSalt(10).then(function(salt){
+    bcryptjs.hash(user.password,salt).then(function(encrypted){
+    user.password=encrypted
+    next()
+
+}).catch(function(err){
+    console.log(err)
+})
+
+
+
+
+
+
+
+
+
+
 userSchema.methods.generateToken=function(){
     let user=this;
     let tokenData={
@@ -136,14 +155,14 @@ module.exports={
 
 
 bcryptjs.genSalt(10).then(function(salt){
-    bcryptjs.hash(user.password,salt).then(function(encrypted))
+    bcryptjs.hash(user.password,salt).then(function(encrypted){
     user.password=encrypted
     next()
-})
+
 }).catch(function(err){
     console.log(err)
 })
-})
+
 userSchema.statistics.findByToken=function(token){
     let User=this
     let tokenData;
@@ -167,4 +186,3 @@ userSchema.statistics.findByToken=function(token){
 
 
     })
-}
